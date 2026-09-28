@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AG Art Studio</title>
+<style>
+:root{--bg:#f7f1e9;--paper:#fffdf9;--ink:#211b17;--muted:#756a61;--accent:#b76e4c;--line:#e7dbcf}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{text-decoration:none;color:inherit}.container{width:min(1150px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#f7f1e9ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif}
+.logo{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#b76e4c,#c79a58);color:white;font-weight:bold}
+.brand small{display:block;font:10px Arial;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+nav{display:flex;gap:25px;font-size:14px}nav a:hover{color:var(--accent)}
+.actions{display:flex;gap:9px}.icon{width:41px;height:41px;border:1px solid var(--line);border-radius:50%;background:var(--paper);cursor:pointer}
+.hero{padding:80px 0}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.eyebrow{font-size:11px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1{font:clamp(48px,6vw,78px)/1 Georgia,serif;letter-spacing:-2px;margin-bottom:20px}h1 em{color:var(--accent)}
+.hero p{color:var(--muted);font-size:17px;max-width:560px;margin-bottom:27px}
+.btn{display:inline-block;padding:13px 21px;border-radius:30px;font-weight:bold;font-size:14px;border:0;cursor:pointer}
+.primary{background:var(--ink);color:#fff}.secondary{background:var(--paper);border:1px solid var(--line);margin-left:8px}
+.art{height:470px;border:14px solid #2b211b;box-shadow:0 18px 50px #0002;background:
+radial-gradient(circle at 25% 28%,#efbd75 0 10%,transparent 11%),
+radial-gradient(circle at 70% 25%,#d8794d 0 15%,transparent 16%),
+radial-gradient(circle at 43% 70%,#75927b 0 20%,transparent 21%),
+linear-gradient(135deg,#eadbc2,#c49b79);transform:rotate(2deg)}
+section{padding:75px 0}.heading{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}.heading h2{font:42px Georgia,serif}.heading p{max-width:480px;color:var(--muted)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.2s}.card:hover{transform:translateY(-5px);box-shadow:0 18px 45px #0001}
+.pic{height:240px;display:grid;place-items:center;font:italic 27px Georgia,serif}.one{background:linear-gradient(135deg,#d9b58b,#eadcc4)}.two{background:linear-gradient(135deg,#8eaa9a,#e0c8a0)}.three{background:linear-gradient(135deg,#cf8364,#edc69a)}.four{background:linear-gradient(135deg,#6d6978,#d6b68f)}
+.info{padding:16px}.info h3{font:20px Georgia,serif}.info p{font-size:13px;color:var(--muted);margin:4px 0 13px}.row{display:flex;justify-content:space-between;align-items:center}.add{background:var(--ink);color:white;border:0;border-radius:9px;padding:9px 12px;cursor:pointer}
+.about{background:#211b17;color:#fff}.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:70px}.about h2{font:48px Georgia,serif}.about p{color:#cfc3b9}.stats{display:flex;gap:15px;margin-top:28px}.stat{border:1px solid #493c34;padding:16px;border-radius:15px;flex:1}.stat b{font:27px Georgia,serif;display:block}
+footer{background:#17120f;color:#b7a99f;padding:40px 0}.footer{display:flex;justify-content:space-between;gap:30px}.footer h3{color:#fff;font-family:Georgia,serif}.footer p{font-size:13px}.copy{text-align:center;border-top:1px solid #302621;margin-top:30px;padding-top:18px;font-size:12px}
+.cart{position:fixed;right:-390px;top:0;width:min(380px,92%);height:100vh;background:var(--paper);z-index:20;padding:25px;box-shadow:-15px 0 40px #0002;transition:.3s}.cart.open{right:0}.cart-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px}.cart-items{height:70%;overflow:auto}.item{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line)}.empty{color:var(--muted);text-align:center;padding:40px 0}.total{display:flex;justify-content:space-between;font-weight:bold;padding:15px 0}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#211b17;color:white;padding:11px 18px;border-radius:30px;display:none;z-index:30}
+.toast.show{display:block}
+@media(max-width:850px){nav{display:none}.hero-grid,.about-grid{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}.art{height:350px}.footer{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.products{grid-template-columns:1fr}.hero{padding:55px 0}.heading{display:block}.heading h2{font-size:34px}.stats{display:grid}.secondary{margin-left:0;margin-top:8px}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="brand" href="#"><span class="logo">AG</span><span><strong>AG Art Studio</strong><small>Original Art & Creations</small></span></a>
+<nav><a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+<div class="actions"><button class="icon" onclick="searchArt()">⌕</button><button class="icon" onclick="toggleCart()">🛒 <b id="count">0</b></button></div>
+</div></header>
+
+<main>
+<section class="hero"><div class="container hero-grid"><div>
+<div class="eyebrow">Original Art · Made With Feeling</div>
+<h1>Art that makes your <em>space</em> feel alive.</h1>
+<p>Discover expressive paintings, portraits and handmade artworks created to bring warmth, personality and a little magic into your everyday space.</p>
+<a class="btn primary" href="#shop">Explore Artwork →</a><a class="btn secondary" href="#about">Meet the Artist</a>
+</div><div class="art"></div></div></section>
+
+<section id="shop"><div class="container"><div class="heading"><div><div class="eyebrow">Featured Collection</div><h2>Made to be noticed.</h2></div><p>Thoughtfully created pieces for collectors, art lovers and anyone who wants their walls to say something.</p></div>
+<div class="products" id="products"></div></div></section>
+
+<section id="collections"><div class="container"><div class="heading"><div><div class="eyebrow">Browse By Mood</div><h2>Find your expression.</h2></div></div>
+<div class="products">
+<div class="card"><div class="pic three">Portraits</div><div class="info"><h3>Portraits</h3><p>Faces, emotions & stories.</p></div></div>
+<div class="card"><div class="pic two">Nature</div><div class="info"><h3>Nature</h3><p>Quiet landscapes & organic forms.</p></div></div>
+<div class="card"><div class="pic four">Abstract</div><div class="info"><h3>Abstract</h3><p>Colour, movement & imagination.</p></div></div>
+</div></div></section>
+
+<section class="about" id="about"><div class="container about-grid"><div><div class="eyebrow">The Studio</div><h2>Created slowly.<br>Felt deeply.</h2></div><div><p>AG Art Studio is an independent creative space built around the belief that art should give a room a soul. Every work is created with attention to colour, texture and emotion.</p><div class="stats"><div class="stat"><b>100+</b>Artworks</div><div class="stat"><b>50+</b>Collectors</div><div class="stat"><b>4K</b>Quality</div></div></div></div></section>
+</main>
+
+<footer id="contact"><div class="container footer"><div><h3>AG Art Studio</h3><p>Original art, handmade with patience and personality.</p></div><div><h3>Explore</h3><p>Shop · Collections · About</p></div><div><h3>Connect</h3><p>Instagram · WhatsApp · Pinterest</p></div></div><div class="container copy">© 2026 AG Art Studio. Crafted with creativity.</div></footer>
+
+<aside class="cart" id="cart"><div class="cart-head"><h2>Your Cart</h2><button class="icon" onclick="toggleCart()">✕</button></div><div class="cart-items" id="cartItems"></div><div class="total"><span>Total</span><span id="total">₹0</span></div><button class="btn primary" style="width:100%" onclick="checkout()">Checkout</button></aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const products=[
+{id:1,n:"Golden Hour",p:2499,c:"one",d:"Warm abstract canvas"},
+{id:2,n:"Monsoon Greens",p:3199,c:"two",d:"Textured landscape"},
+{id:3,n:"The Quiet Face",p:3999,c:"three",d:"Expressive portrait study"},
+{id:4,n:"Midnight Muse",p:2799,c:"four",d:"Moody mixed-media art"}
+];
+let cart=JSON.parse(localStorage.getItem("agArtStudioCart")||"[]");
+const rupee=n=>"₹"+n.toLocaleString("en-IN");
+function render(){
+document.getElementById("products").innerHTML=products.map(x=>`<article class="card"><div class="pic ${x.c}">${x.n}</div><div class="info"><h3>${x.n}</h3><p>${x.d}</p><div class="row"><b>${rupee(x.p)}</b><button class="add" onclick="add(${x.id})">Add to cart</button></div></div></article>`).join("");
+document.getElementById("count").textContent=cart.reduce((a,x)=>a+x.q,0);
+document.getElementById("cartItems").innerHTML=cart.length?cart.map(x=>`<div class="item"><span>${x.n} × ${x.q}</span><b>${rupee(x.p*x.q)}</b></div>`).join(""):`<div class="empty">Your cart is empty.<br>Find something beautiful.</div>`;
+document.getElementById("total").textContent=rupee(cart.reduce((a,x)=>a+x.p*x.q,0));
+}
+function add(id){let p=products.find(x=>x.id===id),x=cart.find(x=>x.id===id);x?x.q++:cart.push({...p,q:1});save();toast(p.n+" added to cart");}
+function save(){localStorage.setItem("agArtStudioCart",JSON.stringify(cart));render()}
+function toggleCart(){document.getElementById("cart").classList.toggle("open")}
+function checkout(){toast(cart.length?"Demo checkout — connect your payment gateway here.":"Your cart is empty.")}
+function searchArt(){let q=prompt("Search artwork:");if(q)toast("Search: "+q)}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+render();
+</script>
+</body>
+</html>
